@@ -13,14 +13,24 @@ interface CallenderProps {}
 const Callender: FC<CallenderProps> = ({}) => {
   // toast.success("Successfully toasted!");
   const [events, setEvents] = useState<event[]>([
-    { title: "event 1", date: "2023-09-26" },
-    { title: "event 2", date: "2023-09-27" },
+    { title: "event 1", date: "2023-09-26", id: "1", allDay: true },
+    {
+      title: "event 2",
+      date: "2023-09-27",
+      id: "2",
+      description: "test",
+      allDay: false,
+    },
   ]);
 
   const handleDateClick = (arg: DateClickArg) => {
     console.log("clicked");
     console.log(arg);
-    setEvents([...events, { title: "event 3", date: arg.dateStr }]);
+    let id = Math.random().toString(36).substring(2);
+    setEvents([
+      ...events,
+      { title: "event 3", date: arg.dateStr, id, allDay: false },
+    ]);
   };
   const eventActions = (arg: EventClickArg) => {
     console.log("Event !! clicked");
