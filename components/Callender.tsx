@@ -11,6 +11,7 @@ import { EventClickArg } from "@fullcalendar/core/index.js";
 interface CallenderProps {}
 
 const Callender: FC<CallenderProps> = ({}) => {
+  // toast.success("Successfully toasted!");
   const [events, setEvents] = useState<event[]>([
     { title: "event 1", date: "2023-09-26" },
     { title: "event 2", date: "2023-09-27" },
