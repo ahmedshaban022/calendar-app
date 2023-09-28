@@ -14,7 +14,7 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
     description: "",
     allDay: true,
   });
-  //   const [errorMsg, setErrorMsg] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
   useEffect(() => {
     if (ExitedEvent) {
       setEvent(ExitedEvent);
@@ -26,14 +26,17 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
     e.preventDefault();
 
     if (!event || !event.title) {
+      setErrorMsg("Title is required");
       return;
     }
-    const id = Math.random().toString(36).substring(2);
+    setErrorMsg("");
     if (ExitedEvent) {
-      editEvent({ ...event, id });
+      editEvent({ ...event });
       return;
     } else {
+      const id = Math.random().toString(36).substring(2);
       createEvent({ ...event, id });
+      console.log(id);
     }
   };
   return (
@@ -59,7 +62,6 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
             type={event.allDay ? "date" : "datetime-local"}
             name="date"
             onChange={(e) => {
-              console.log(e.target.value);
               setEvent({ ...event, date: new Date(e.target.value) });
             }}
             required
@@ -75,7 +77,7 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
           <label htmlFor="allDay">All Day </label>
         </div>
         <div className="text-orange-600 my-2">
-          {/* {errorMsg && <p>{errorMsg} </p>} */}
+          {errorMsg && <p>{errorMsg} </p>}
         </div>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Submit
