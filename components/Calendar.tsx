@@ -5,32 +5,25 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction"; // needed for dayClick
 import timeGridPlugin from "@fullcalendar/timegrid";
 
-import { event } from "@/types/calenderTyps";
 import { EventClickArg } from "@fullcalendar/core/index.js";
+import { useEvents } from "@/context/EventsContext";
 
-interface CallenderProps {}
+interface CalendarProps {}
 
-const Callender: FC<CallenderProps> = ({}) => {
+const Calendar: FC<CalendarProps> = ({}) => {
   // toast.success("Successfully toasted!");
-  const [events, setEvents] = useState<event[]>([
-    { title: "event 1", date: "2023-09-26", id: "1", allDay: true },
-    {
-      title: "event 2",
-      date: "2023-09-27",
-      id: "2",
-      description: "test",
-      allDay: false,
-    },
-  ]);
+  const { events, setEvents } = useEvents();
 
   const handleDateClick = (arg: DateClickArg) => {
     console.log("clicked");
     console.log(arg);
     let id = Math.random().toString(36).substring(2);
-    setEvents([
-      ...events,
-      { title: "event 3", date: arg.dateStr, id, allDay: false },
-    ]);
+    if (Array.isArray(events)) {
+      setEvents([
+        ...events,
+        { title: "event 3", date: arg.dateStr, id, allDay: false },
+      ]);
+    }
   };
   const eventActions = (arg: EventClickArg) => {
     console.log("Event !! clicked");
@@ -54,4 +47,4 @@ const Callender: FC<CallenderProps> = ({}) => {
   );
 };
 
-export default Callender;
+export default Calendar;
