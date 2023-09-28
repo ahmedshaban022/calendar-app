@@ -36,7 +36,6 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
     } else {
       const id = Math.random().toString(36).substring(2);
       createEvent({ ...event, id });
-      console.log(id);
     }
   };
   return (
