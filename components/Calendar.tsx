@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction"; // needed for dayClick
@@ -9,11 +9,16 @@ import { EventClickArg } from "@fullcalendar/core/index.js";
 import { useEvents } from "@/context/EventsContext";
 import EventForm from "./EventForm";
 import CustomDialog from "./Dialog";
+import { event } from "@/types/calenderTyps";
+import EventCard from "./EventCard";
+import DayEvents from "./DayEvents";
 
 interface CalendarProps {}
 
 const Calendar: FC<CalendarProps> = ({}) => {
-  // toast.success("Successfully toasted!");
+  const [selectedDay, setSelectedDay] = useState<Date | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dayEvents, setDayEvents] = useState<event[]>([]);
   const {
     events,
     setEvents,
@@ -25,15 +30,9 @@ const Calendar: FC<CalendarProps> = ({}) => {
   } = useEvents();
 
   const handleDateClick = (arg: DateClickArg) => {
-    let id = Math.random().toString(36).substring(2);
-    createEvent({
-      title: "event 3",
-      date: arg.date,
-      id,
-      allDay: arg.allDay,
-    });
-    console.log("Events on this Day!!");
-    console.log(getEventsByDay(arg.date));
+    setOpenDialog(true);
+    // setDayEvents(getEventsByDay(arg.date));
+    setSelectedDay(arg.date);
   };
   const eventActions = (arg: EventClickArg) => {
     console.log("Event !! clicked");
@@ -45,6 +44,7 @@ const Calendar: FC<CalendarProps> = ({}) => {
     event.title = "Hello";
     editEvent(event);
   };
+  useEffect(() => {}, [events, dayEvents]);
   return (
     <main className="   ">
       <div className="text-right">
@@ -54,7 +54,18 @@ const Calendar: FC<CalendarProps> = ({}) => {
           </CustomDialog>
         </div>
       </div>
-
+      {selectedDay && (
+        <div>
+          <CustomDialog
+            title="Events on this day"
+            triggerString=""
+            open={openDialog}
+            setOpen={setOpenDialog}
+          >
+            <DayEvents selectedDate={selectedDay} />
+          </CustomDialog>
+        </div>
+      )}
       <FullCalendar
         height={"85vh"}
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}

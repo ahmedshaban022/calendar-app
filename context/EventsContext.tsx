@@ -37,7 +37,8 @@ export default function EventsContextProvider({ children }: contextProps) {
     setEvents([...newEvents]); //! need to fix
   };
   const deleteEvent = (id: string) => {
-    setEvents(events.filter((e) => e.id !== id));
+    const newEvents = events.filter((e) => e.id !== id);
+    setEvents([...newEvents]);
   };
   const getEventsByDay = (selectedDayDate: Date) => {
     return events.filter((e) => {
