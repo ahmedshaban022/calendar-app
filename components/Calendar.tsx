@@ -8,6 +8,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import { EventClickArg } from "@fullcalendar/core/index.js";
 import { useEvents } from "@/context/EventsContext";
 import EventForm from "./EventForm";
+import CustomDialog from "./Dialog";
 
 interface CalendarProps {}
 
@@ -45,8 +46,17 @@ const Calendar: FC<CalendarProps> = ({}) => {
     editEvent(event);
   };
   return (
-    <main className=" w-[60rem] ">
+    <main className="   ">
+      <div className="text-right">
+        <div className=" bg-blue-600 p-2 rounded text-white inline-block">
+          <CustomDialog title="New Event" triggerString="New Event">
+            <EventForm />
+          </CustomDialog>
+        </div>
+      </div>
+
       <FullCalendar
+        height={"85vh"}
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
         initialView="timeGridWeek"
         dateClick={handleDateClick}
@@ -58,7 +68,6 @@ const Calendar: FC<CalendarProps> = ({}) => {
         }}
         eventClick={eventActions}
       />
-      <EventForm />
     </main>
   );
 };

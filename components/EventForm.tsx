@@ -1,6 +1,8 @@
 import { useEvents } from "@/context/EventsContext";
+import { generateId } from "@/lib/utils";
 import { event } from "@/types/calenderTyps";
 import { FC, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface EventFormProps {
   ExitedEvent?: event;
@@ -32,14 +34,23 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
     setErrorMsg("");
     if (ExitedEvent) {
       editEvent({ ...event });
+      toast.success("Successfully edited !!");
       return;
     } else {
-      const id = Math.random().toString(36).substring(2);
+      const id = generateId();
       createEvent({ ...event, id });
+      toast.success("Successfully created !!");
+      setEvent({
+        id: generateId(),
+        date: new Date(),
+        title: "",
+        description: "",
+        allDay: true,
+      });
     }
   };
   return (
-    <div className="w-[60rem] border p-4 my-4">
+    <div className=" border p-4 my-4">
       <form onSubmit={handleSubmit} className="flex flex-col p-4">
         <input
           type="text"

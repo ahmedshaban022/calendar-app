@@ -14,10 +14,16 @@
     "@fullcalendar/interaction": "^6.1.9",
     "@fullcalendar/react": "^6.1.9",
     "@fullcalendar/timegrid": "^6.1.9",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.279.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "latest",
