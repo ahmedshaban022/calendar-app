@@ -12,22 +12,36 @@ interface CalendarProps {}
 
 const Calendar: FC<CalendarProps> = ({}) => {
   // toast.success("Successfully toasted!");
-  const { events, setEvents } = useEvents();
+  const {
+    events,
+    setEvents,
+    createEvent,
+    getEventsByDay,
+    deleteEvent,
+    editEvent,
+    getEventDetails,
+  } = useEvents();
 
   const handleDateClick = (arg: DateClickArg) => {
-    console.log("clicked");
-    console.log(arg);
     let id = Math.random().toString(36).substring(2);
-    if (Array.isArray(events)) {
-      setEvents([
-        ...events,
-        { title: "event 3", date: arg.dateStr, id, allDay: false },
-      ]);
-    }
+    createEvent({
+      title: "event 3",
+      date: arg.date,
+      id,
+      allDay: arg.allDay,
+    });
+    console.log("Events on this Day!!");
+    console.log(getEventsByDay(arg.date));
   };
   const eventActions = (arg: EventClickArg) => {
     console.log("Event !! clicked");
-    console.log(arg);
+    // deleteEvent(arg.event.id);
+    const event = getEventDetails(arg.event.id);
+    if (!event) {
+      return null;
+    }
+    event.title = "Hello";
+    editEvent(event);
   };
   return (
     <main className=" w-[60rem] ">
