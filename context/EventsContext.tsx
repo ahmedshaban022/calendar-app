@@ -1,6 +1,6 @@
 "use client";
 import { event } from "@/types/calenderTyps";
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 type contextProps = {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ type contextType = {
 };
 export const eventContext = createContext<contextType | null>(null);
 export default function EventsContextProvider({ children }: contextProps) {
-  const [events, setEvents] = React.useState<event[]>([]);
+  const [events, setEvents] = useState<event[]>([]);
 
   useEffect(() => {
     const localEvents = localStorage.getItem("events");
@@ -26,7 +26,7 @@ export default function EventsContextProvider({ children }: contextProps) {
         setEvents(parsedEvents);
       }
     }
-  }, [events]);
+  }, []);
   const createEvent = (event: event) => {
     setEvents([...events, event]);
   };
@@ -34,7 +34,7 @@ export default function EventsContextProvider({ children }: contextProps) {
     const newEvents: event[] = events.map((e) => {
       return e.id === event.id ? event : e;
     });
-    setEvents(newEvents);
+    setEvents([...newEvents]); //! need to fix
   };
   const deleteEvent = (id: string) => {
     setEvents(events.filter((e) => e.id !== id));

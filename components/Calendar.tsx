@@ -7,6 +7,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 
 import { EventClickArg } from "@fullcalendar/core/index.js";
 import { useEvents } from "@/context/EventsContext";
+import EventForm from "./EventForm";
 
 interface CalendarProps {}
 
@@ -57,6 +58,7 @@ const Calendar: FC<CalendarProps> = ({}) => {
         }}
         eventClick={eventActions}
       />
+      <EventForm />
     </main>
   );
 };
