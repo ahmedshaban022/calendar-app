@@ -62,7 +62,9 @@ const Page: FC<pageProps> = ({ params }) => {
       </div>
       {event ? (
         <div className="">
-          <div className={`${bgColor}  max-w-[600px]  m-auto p-5 rounded-md`}>
+          <div
+            className={`${bgColor}  max-w-[600px]  m-auto p-5 rounded-md min-h-[300px]`}
+          >
             <div className="flex justify-between my-2 ">
               <div className="flex space-x-2">
                 <div className="border-2 border-blue-600 bg-blue-400 rounded text-white px-3 py-1 ">
@@ -88,12 +90,28 @@ const Page: FC<pageProps> = ({ params }) => {
                 </button>
               </div>
             </div>
-            <div className="flex gap-2 justify-center text-2xl">
+            <div className="my-4 flex  justify-center font-semibold text-2xl drop-shadow-2xl shadow shadow-white ">
               <CalendarClock />
               <p> {formatDate(event.date)}</p>
             </div>
-            <h1 className="text-3xl">Title: {event.title}</h1>
-            {event.description && <p>Description: {event.description}</p>}
+
+            <div>
+              <div className="p-2 flex justify-between  ">
+                <span>{event.allDay ? "All Day Event" : "Hourly Event "}</span>
+
+                <span className="text-teal-700 text-md">
+                  {event.priority.charAt(0).toUpperCase() +
+                    event.priority.slice(1)}
+                </span>
+              </div>
+
+              <div className="text-center">
+                <h1 className="text-3xl"> {event.title}</h1>
+                {event.description && (
+                  <p className="text-lg">Description: {event.description}</p>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       ) : (
