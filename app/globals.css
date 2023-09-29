@@ -35,6 +35,11 @@
     --radius: 0.5rem;
   }
  
+.btn-actions{
+  @apply transition hover:scale-105 active:scale-95 ;
+}
+
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;

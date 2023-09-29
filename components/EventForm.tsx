@@ -117,7 +117,7 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
         <div className="text-orange-600 my-2">
           {errorMsg && <p>{errorMsg} </p>}
         </div>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button className="btn-actions bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Submit
         </button>
       </form>

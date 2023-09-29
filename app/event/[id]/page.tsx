@@ -2,7 +2,6 @@
 import CustomDialog from "@/components/Dialog";
 import EventForm from "@/components/EventForm";
 import { useEvents } from "@/context/EventsContext";
-import { getBgColorBasedOnPriority } from "@/lib/utils";
 import { event } from "@/types/calenderTypes";
 import { CalendarClock } from "lucide-react";
 import Link from "next/link";
@@ -15,7 +14,8 @@ interface pageProps {
 
 const Page: FC<pageProps> = ({ params }) => {
   const [event, setEvent] = useState<event | null | "loading">("loading");
-  const { getEventDetails, deleteEvent, completeEvent, events } = useEvents();
+  const { getEventDetails, deleteEvent, completeEvent } = useEvents();
+
   useEffect(() => {
     if (params.id) {
       const existedEvent = getEventDetails(params.id);
@@ -25,7 +25,7 @@ const Page: FC<pageProps> = ({ params }) => {
         setEvent(null);
       }
     }
-  }, [params, events]);
+  }, [params, getEventDetails]);
 
   if (event === "loading") {
     return (
@@ -34,10 +34,6 @@ const Page: FC<pageProps> = ({ params }) => {
       </div>
     );
   }
-  let bgColor =
-    event?.status === "Completed"
-      ? "bg-green-200"
-      : getBgColorBasedOnPriority(event?.priority!);
 
   const handleDeleteEvent = () => {
     if (event) {
@@ -55,7 +51,7 @@ const Page: FC<pageProps> = ({ params }) => {
       <div className="m-5 p-5">
         <Link
           href="/"
-          className=" px-3 py-1 rounded border-b hover:text-blue-500  shadow"
+          className="btn-actions px-3 py-1 rounded border-b hover:text-blue-500  shadow"
         >
           {"⬅️"} Back To Calender
         </Link>
@@ -63,18 +59,20 @@ const Page: FC<pageProps> = ({ params }) => {
       {event ? (
         <div className="">
           <div
-            className={`${bgColor}  max-w-[600px]  m-auto p-5 rounded-md min-h-[300px]`}
+            className={`${
+              event.status === "Completed" ? "bg-green-200" : "bg-gray-100"
+            } max-w-[600px]  m-auto p-5 rounded-md min-h-[300px]`}
           >
             <div className="flex justify-between my-2 ">
               <div className="flex space-x-2">
-                <div className="border-2 border-blue-600 bg-blue-400 rounded text-white px-3 py-1 ">
+                <div className="btn-actions border-2 border-blue-600 bg-blue-400 rounded text-white px-3 py-1 ">
                   <CustomDialog title="Edit Event" triggerString="Edit">
                     <EventForm ExitedEvent={event} />
                   </CustomDialog>
                 </div>
                 {event.status !== "Completed" && (
                   <button
-                    className="py-1 px-2 text-white rounded  border bg-green-500 border-green-600 "
+                    className="btn-actions py-1 px-2 text-white rounded  border bg-green-500 border-green-600 "
                     onClick={handleCompleteEvent}
                   >
                     Complete
@@ -83,7 +81,7 @@ const Page: FC<pageProps> = ({ params }) => {
               </div>
               <div>
                 <button
-                  className="py-1 px-2  text-white rounded  border bg-red-500 border-red-600"
+                  className="btn-actions   py-1 px-2  text-white rounded  border bg-red-500 border-red-600"
                   onClick={handleDeleteEvent}
                 >
                   Delete
@@ -106,9 +104,9 @@ const Page: FC<pageProps> = ({ params }) => {
               </div>
 
               <div className="text-center">
-                <h1 className="text-3xl"> {event.title}</h1>
+                <h1 className="text-3xl my-3"> {event.title}</h1>
                 {event.description && (
-                  <p className="text-lg">Description: {event.description}</p>
+                  <p className="text-lg"> {event.description}</p>
                 )}
               </div>
             </div>
