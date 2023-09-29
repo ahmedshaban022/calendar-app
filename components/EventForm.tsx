@@ -51,6 +51,17 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
       });
     }
   };
+  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    //! need to refactor
+    if (
+      e.target.value === "low" ||
+      e.target.value === "medium" ||
+      e.target.value === "high" ||
+      e.target.value === "urgent"
+    ) {
+      setEvent({ ...event, priority: e.target.value });
+    }
+  };
   return (
     <div className=" border p-4 my-4">
       <form onSubmit={handleSubmit} className="flex flex-col p-4">
@@ -87,6 +98,19 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
             onChange={(e) => setEvent({ ...event, allDay: e.target.checked })}
           />
           <label htmlFor="allDay">All Day </label>
+        </div>
+        <div>
+          <select
+            name="priority"
+            value={event?.priority}
+            onChange={handleDropdownChange}
+            className="w-full p-2 m-2 rounded border border-black "
+          >
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="urgent">Urgent</option>
+          </select>
         </div>
         <div className="text-orange-600 my-2">
           {errorMsg && <p>{errorMsg} </p>}
