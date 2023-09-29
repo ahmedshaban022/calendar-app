@@ -3,5 +3,6 @@ export type event = {
   title: string;
   date: Date;
   description?: string;
-  allDay?: boolean;
+  allDay: boolean;
+  priority: "low" | "medium" | "high" | "urgent";
 };

@@ -9,7 +9,7 @@ import { EventClickArg } from "@fullcalendar/core/index.js";
 import { useEvents } from "@/context/EventsContext";
 import EventForm from "./EventForm";
 import CustomDialog from "./Dialog";
-import { event } from "@/types/calenderTyps";
+import { event } from "@/types/calenderTypes";
 import EventCard from "./EventCard";
 import DayEvents from "./DayEvents";
 

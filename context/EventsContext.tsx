@@ -1,5 +1,5 @@
 "use client";
-import { event } from "@/types/calenderTyps";
+import { event } from "@/types/calenderTypes";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type contextProps = {

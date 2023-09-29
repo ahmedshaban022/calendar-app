@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
 import EventCard from "./EventCard";
-import { event } from "@/types/calenderTyps";
+import { event } from "@/types/calenderTypes";
 import { useEvents } from "@/context/EventsContext";
 
 interface DayEventsProps {

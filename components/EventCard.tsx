@@ -1,5 +1,5 @@
 import { useEvents } from "@/context/EventsContext";
-import { event } from "@/types/calenderTyps";
+import { event } from "@/types/calenderTypes";
 import Link from "next/link";
 import { FC } from "react";
 

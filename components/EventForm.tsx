@@ -1,6 +1,6 @@
 import { useEvents } from "@/context/EventsContext";
 import { generateId } from "@/lib/utils";
-import { event } from "@/types/calenderTyps";
+import { event } from "@/types/calenderTypes";
 import { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -15,6 +15,7 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
     date: new Date(),
     description: "",
     allDay: true,
+    priority: "low",
   });
   const [errorMsg, setErrorMsg] = useState<string>("");
   useEffect(() => {
@@ -46,6 +47,7 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
         title: "",
         description: "",
         allDay: true,
+        priority: "low",
       });
     }
   };
