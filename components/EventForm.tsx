@@ -89,7 +89,7 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
             onChange={(e) => {
               setEvent({ ...event, date: new Date(e.target.value) });
             }}
-            required
+            required={!event.date}
           />
 
           <input
