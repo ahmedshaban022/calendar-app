@@ -62,15 +62,17 @@ const Page: FC<pageProps> = ({ params }) => {
       </div>
       {event ? (
         <div className="">
-          <div className={`${bgColor} max-w-[600px]  m-auto p-5 rounded-md`}>
-            <div className="flex justify-between ">
-              <div>
-                <CustomDialog title="Edit Event" triggerString="Edit">
-                  <EventForm ExitedEvent={event} />
-                </CustomDialog>
+          <div className={`${bgColor}  max-w-[600px]  m-auto p-5 rounded-md`}>
+            <div className="flex justify-between my-2 ">
+              <div className="flex space-x-2">
+                <div className="border-2 border-blue-600 bg-blue-400 rounded text-white px-3 py-1 ">
+                  <CustomDialog title="Edit Event" triggerString="Edit">
+                    <EventForm ExitedEvent={event} />
+                  </CustomDialog>
+                </div>
                 {event.status !== "Completed" && (
                   <button
-                    className="py-1 px-2 text-red-900"
+                    className="py-1 px-2 text-white rounded  border bg-green-500 border-green-600 "
                     onClick={handleCompleteEvent}
                   >
                     Complete
@@ -78,9 +80,8 @@ const Page: FC<pageProps> = ({ params }) => {
                 )}
               </div>
               <div>
-                {" "}
                 <button
-                  className="py-1 px-2 text-red-900"
+                  className="py-1 px-2  text-white rounded  border bg-red-500 border-red-600"
                   onClick={handleDeleteEvent}
                 >
                   Delete

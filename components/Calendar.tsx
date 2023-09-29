@@ -49,7 +49,7 @@ const Calendar: FC<CalendarProps> = ({}) => {
     <main className="   ">
       <div className="text-right">
         <div className=" bg-blue-600 p-2 rounded text-white inline-block">
-          <CustomDialog title="New Event" triggerString="New Event">
+          <CustomDialog title="Create New Event" triggerString="New Event">
             <EventForm />
           </CustomDialog>
         </div>

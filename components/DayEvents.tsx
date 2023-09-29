@@ -19,11 +19,15 @@ const DayEvents: FC<DayEventsProps> = ({ selectedDate }) => {
   }, [selectedDate, events]);
   return (
     <div>
-      {dayEvents.map((event) => (
-        <React.Fragment key={event.id}>
-          <EventCard event={event} />
-        </React.Fragment>
-      ))}
+      {dayEvents.length > 0 ? (
+        dayEvents.map((event) => (
+          <React.Fragment key={event.id}>
+            <EventCard event={event} />
+          </React.Fragment>
+        ))
+      ) : (
+        <div>No events on this day</div>
+      )}
     </div>
   );
 };

@@ -12,7 +12,7 @@ export const generateId = () => {
 export const getBgColorBasedOnPriority = (
   priority: "low" | "medium" | "high" | "urgent"
 ) => {
-  let bgColor = "bg-white";
+  let bgColor = "";
   switch (priority) {
     case "medium":
       bgColor = "bg-yellow-200";
