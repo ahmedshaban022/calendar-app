@@ -5,4 +5,5 @@ export type event = {
   description?: string;
   allDay: boolean;
   priority: "low" | "medium" | "high" | "urgent";
+  status: "ToDo" | "Completed";
 };

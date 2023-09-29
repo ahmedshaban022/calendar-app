@@ -1,4 +1,5 @@
 import { useEvents } from "@/context/EventsContext";
+import { getBgColorBasedOnPriority } from "@/lib/utils";
 import { event } from "@/types/calenderTypes";
 import Link from "next/link";
 import { FC } from "react";
@@ -8,35 +9,43 @@ interface EventCardProps {
 }
 
 const EventCard: FC<EventCardProps> = ({ event }) => {
-  const { deleteEvent } = useEvents();
+  const { deleteEvent, completeEvent } = useEvents();
+  const handleCompleteEvent = (id: string) => {
+    completeEvent(id);
+  };
   const handleDeleteEvent = (id: string) => {
     deleteEvent(id);
   };
-  let bgColor = "bg-white";
-  switch (event.priority) {
-    case "medium":
-      bgColor = "bg-yellow-200";
-      break;
-    case "high":
-      bgColor = "bg-orange-300";
-      break;
-    case "urgent":
-      bgColor = "bg-red-300";
-      break;
-    default:
-      bgColor = "bg-blue-200";
-  }
-  return (
-    <div className={`m-1 p-2 border flex justify-between rounded ${bgColor}`}>
-      <div>
-        <p className="font-bold text-black">{event.title}</p>
+  let bgColor =
+    event.status === "Completed"
+      ? "bg-green-200"
+      : getBgColorBasedOnPriority(event.priority);
 
-        <small className="text-black">
-          {event.priority.charAt(0).toUpperCase() + event.priority.slice(1)}
-        </small>
+  return (
+    <div
+      className={`m-1 p-2 border flex justify-between rounded ${bgColor} hover:scale-105 transition`}
+    >
+      <div>
+        <p className="font-bold text-black">
+          <Link href={`/event/${event.id}`}>{event.title}</Link>
+        </p>
+
+        <div className="space-x-3">
+          <small className="text-black">
+            {event.priority.charAt(0).toUpperCase() + event.priority.slice(1)}
+          </small>
+          <small className="text-black">{event.status}</small>
+        </div>
       </div>
       <div className="space-x-3">
-        <Link href={`/event/${event.id}`}>View</Link>
+        {event.status !== "Completed" && (
+          <button
+            className="py-1 px-2 text-Green-900 "
+            onClick={() => handleCompleteEvent(event.id)}
+          >
+            Complete
+          </button>
+        )}
         <button
           className="py-1 px-2 text-red-900 "
           onClick={() => handleDeleteEvent(event.id)}

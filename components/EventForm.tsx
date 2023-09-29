@@ -16,6 +16,7 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
     description: "",
     allDay: true,
     priority: "low",
+    status: "ToDo",
   });
   const [errorMsg, setErrorMsg] = useState<string>("");
   useEffect(() => {
@@ -48,6 +49,7 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
         description: "",
         allDay: true,
         priority: "low",
+        status: "ToDo",
       });
     }
   };

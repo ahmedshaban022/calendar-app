@@ -13,6 +13,7 @@ type contextType = {
   editEvent: (event: event) => void;
   deleteEvent: (id: string) => void;
   getEventsByDay: (date: Date) => event[];
+  completeEvent: (id: string) => void;
 };
 export const eventContext = createContext<contextType | null>(null);
 export default function EventsContextProvider({ children }: contextProps) {
@@ -54,6 +55,12 @@ export default function EventsContextProvider({ children }: contextProps) {
     if (event) return event;
     return null;
   };
+  const completeEvent = (id: string) => {
+    const newEvents: event[] = events.map((e) => {
+      return e.id === id ? { ...e, status: "Completed" } : e;
+    });
+    setEvents([...newEvents]);
+  };
   return (
     <eventContext.Provider
       value={{
@@ -64,6 +71,7 @@ export default function EventsContextProvider({ children }: contextProps) {
         deleteEvent,
         getEventDetails,
         getEventsByDay,
+        completeEvent,
       }}
     >
       {children}
