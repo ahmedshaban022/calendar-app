@@ -18,7 +18,7 @@ const DayEvents: FC<DayEventsProps> = ({ selectedDate }) => {
     }
   }, [selectedDate, events]);
   return (
-    <div>
+    <div className="overflow-y-auto max-h-[60vh] overflow-x-hidden">
       {dayEvents.length > 0 ? (
         dayEvents.map((event) => (
           <React.Fragment key={event.id}>

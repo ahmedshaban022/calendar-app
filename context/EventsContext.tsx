@@ -18,18 +18,8 @@ type contextType = {
 };
 export const eventContext = createContext<contextType | null>(null);
 export default function EventsContextProvider({ children }: contextProps) {
-  // const [events, setEvents] = useState<event[]>([]);
   const { value: events, setValue: setEvents } = useLocalStorage("events", []);
 
-  useEffect(() => {
-    const localEvents = localStorage.getItem("events");
-    if (localEvents) {
-      const parsedEvents = JSON.parse(localEvents);
-      if (Array.isArray(parsedEvents) && parsedEvents.length > 0) {
-        setEvents(parsedEvents);
-      }
-    }
-  }, []);
   const createEvent = (event: event) => {
     setEvents([...events, event]);
   };
@@ -37,7 +27,7 @@ export default function EventsContextProvider({ children }: contextProps) {
     const newEvents: event[] = events.map((e) => {
       return e.id === event.id ? event : e;
     });
-    setEvents([...newEvents]); //! need to fix
+    setEvents([...newEvents]);
   };
   const deleteEvent = (id: string) => {
     const newEvents = events.filter((e) => e.id !== id);
