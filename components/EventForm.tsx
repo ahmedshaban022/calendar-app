@@ -94,12 +94,12 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
             <label htmlFor="allDay"> All day </label>
           </div>
 
-          <div className="grid grid-cols-2 border border-black p-2 my-2 mx-1">
-            <label className="col-span-1" htmlFor="startDate">
+          <div className="grid grid-cols-5 border border-black p-2 my-2 mx-1  text-sm">
+            <label className="col-span-2" htmlFor="startDate">
               Start Date :
             </label>
             <input
-              className="col-span-1"
+              className="col-span-3"
               type={event.allDay ? "date" : "datetime-local"}
               name="date"
               id="startDate"
@@ -113,12 +113,12 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
               required={!event.date}
             />
           </div>
-          <div className="grid grid-cols-2 border border-black p-2 m-1">
-            <label htmlFor="endDate" className="col-span-1 ">
+          <div className="grid grid-cols-5 border border-black p-2 m-1  text-sm">
+            <label htmlFor="endDate" className="col-span-2 ">
               End Date (optional):
             </label>
             <input
-              className="col-span-1"
+              className="col-span-3"
               id="endDate"
               type={event.allDay ? "date" : "datetime-local"}
               name="date"
