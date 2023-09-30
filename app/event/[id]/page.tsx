@@ -80,7 +80,7 @@ const Page: FC<pageProps> = ({ params }) => {
                     Complete
                   </button>
                 ) : (
-                  <span className="text-green-600">Completed</span>
+                  <span className="text-green-600 mt-1">Completed</span>
                 )}
               </div>
               <div>

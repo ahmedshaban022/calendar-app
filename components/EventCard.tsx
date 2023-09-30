@@ -27,7 +27,7 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
         <p className="my-1 p-1 font-bold text-black">
           <Link
             href={`/event/${event.id}`}
-            className="btn-actions hover:text-blue-500 transition"
+            className="text-lg hover:text-blue-500 transition"
           >
             {event.title}
           </Link>
