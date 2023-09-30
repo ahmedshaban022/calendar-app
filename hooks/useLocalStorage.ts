@@ -2,7 +2,7 @@ import { event } from "@/types/calenderTypes";
 import React, { useEffect, useState } from "react";
 
 function getSavedValue(key: string, initialValue: event[] | null) {
-  const savedValue = localStorage.getItem(key);
+  const savedValue = window.localStorage.getItem(key);
   if (savedValue) {
     const parsedValue: event[] = JSON.parse(savedValue);
     return parsedValue;
