@@ -97,10 +97,10 @@ const EventDetails: FC<EventDetailsProps> = ({ id }) => {
               <CalendarClock />
               <p> {formatDate(event.date)}</p>
             </div>
-            {event.start && event.end ? (
+            {event?.start && event?.end ? (
               <div className="mb-2 mt-10 flex  justify-between font-semibold  border-b border-black ">
-                <p> Start: {formatDate(event.date)}</p>
-                <p> End: {formatDate(event.date)}</p>
+                <p> Start: {formatDate(event?.start)}</p>
+                <p> End: {formatDate(event?.end)}</p>
               </div>
             ) : null}
 
