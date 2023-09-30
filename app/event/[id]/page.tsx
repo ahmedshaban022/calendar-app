@@ -1,6 +1,7 @@
 "use client";
 import CustomDialog from "@/components/Dialog";
 import EventForm from "@/components/EventForm";
+import Priority from "@/components/Priority";
 import { useEvents } from "@/context/EventsContext";
 import { formatDate } from "@/lib/utils";
 import { event } from "@/types/calenderTypes";
@@ -61,8 +62,8 @@ const Page: FC<pageProps> = ({ params }) => {
         <div className="">
           <div
             className={`${
-              event.status === "Completed" ? "bg-green-200" : "bg-gray-100"
-            } max-w-[600px]  m-auto p-5 rounded-md min-h-[300px]`}
+              event.status === "Completed" ? "bg-green-200" : "bg-blue-100"
+            } max-w-[600px]  m-auto p-5 rounded-md min-h-[500px]`}
           >
             <div className="flex justify-between my-2 ">
               <div className="flex space-x-2">
@@ -71,13 +72,15 @@ const Page: FC<pageProps> = ({ params }) => {
                     <EventForm ExitedEvent={event} />
                   </CustomDialog>
                 </div>
-                {event.status !== "Completed" && (
+                {event.status !== "Completed" ? (
                   <button
                     className="btn-actions py-1 px-2 text-white rounded  border bg-green-500 border-green-600 "
                     onClick={handleCompleteEvent}
                   >
                     Complete
                   </button>
+                ) : (
+                  <span className="text-green-600">Completed</span>
                 )}
               </div>
               <div>
@@ -89,25 +92,27 @@ const Page: FC<pageProps> = ({ params }) => {
                 </button>
               </div>
             </div>
-            <div className="my-4 flex  justify-center font-semibold text-2xl drop-shadow-2xl shadow shadow-white ">
+            <div className="mb-2 mt-10 flex  justify-center font-semibold text-2xl border-b-2 border-black ">
               <CalendarClock />
               <p> {formatDate(event.date)}</p>
             </div>
 
             <div>
               <div className="p-2 flex justify-between  ">
-                <span>{event.allDay ? "All Day Event" : "Hourly Event "}</span>
+                <span>{event.allDay ? " Day Event" : "Hourly Event "}</span>
 
-                <span className="text-teal-700 text-md">
-                  {event.priority.charAt(0).toUpperCase() +
-                    event.priority.slice(1)}
-                </span>
+                <Priority priority={event.priority} />
               </div>
 
               <div className="text-center">
-                <h1 className="text-3xl my-3"> {event.title}</h1>
+                <h1 className="text-3xl my-3 border-b border-black p-2 inline-block">
+                  {event.title}
+                </h1>
                 {event.description && (
-                  <p className="text-lg"> {event.description}</p>
+                  <div className=" text-start">
+                    <p>Description:</p>
+                    <p> {event.description}</p>
+                  </div>
                 )}
               </div>
             </div>

@@ -36,7 +36,7 @@ const Calendar: FC<CalendarProps> = ({}) => {
       {selectedDay && (
         <div>
           <CustomDialog
-            title="Events on this day"
+            title={`Events on  ${selectedDay.toLocaleDateString()}`}
             triggerString=""
             open={openDialog}
             setOpen={setOpenDialog}
