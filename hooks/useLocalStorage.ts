@@ -17,7 +17,9 @@ export default function useLocalStorage(
   key: string,
   initialValue: event[] | null
 ) {
-  const [value, setValue] = useState<event[]>([]);
+  const [value, setValue] = useState<event[]>(() => {
+    return getSavedValue(key, initialValue) || [];
+  });
   useEffect(() => {
     setValue(() => {
       return getSavedValue(key, initialValue);
