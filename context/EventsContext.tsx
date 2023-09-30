@@ -1,4 +1,5 @@
 "use client";
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { event } from "@/types/calenderTypes";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
@@ -17,7 +18,8 @@ type contextType = {
 };
 export const eventContext = createContext<contextType | null>(null);
 export default function EventsContextProvider({ children }: contextProps) {
-  const [events, setEvents] = useState<event[]>([]);
+  // const [events, setEvents] = useState<event[]>([]);
+  const { value: events, setValue: setEvents } = useLocalStorage("events", []);
 
   useEffect(() => {
     const localEvents = localStorage.getItem("events");
