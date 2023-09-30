@@ -1,3 +1,4 @@
+"use client";
 import { event } from "@/types/calenderTypes";
 import React, { useEffect, useState } from "react";
 
@@ -18,7 +19,7 @@ export default function useLocalStorage(
   initialValue: event[] | null
 ) {
   const [value, setValue] = useState<event[]>(() => {
-    return getSavedValue(key, initialValue) || [];
+    return getSavedValue(key, initialValue);
   });
   useEffect(() => {
     setValue(() => {
