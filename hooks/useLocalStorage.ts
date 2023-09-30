@@ -18,7 +18,7 @@ export default function useLocalStorage(
   initialValue: event[] | null
 ) {
   const [value, setValue] = useState<event[]>(() => {
-    if (!window) {
+    if (typeof localStorage === "undefined") {
       // to solve host local storage issue
       return [];
     }
