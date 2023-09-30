@@ -2,7 +2,7 @@ import { event } from "@/types/calenderTypes";
 import React, { useEffect, useState } from "react";
 
 function getSavedValue(key: string, initialValue: event[] | null) {
-  const savedValue = window.localStorage.getItem(key);
+  const savedValue = localStorage.getItem(key);
   if (savedValue) {
     const parsedValue: event[] = JSON.parse(savedValue);
     return parsedValue;
@@ -17,9 +17,12 @@ export default function useLocalStorage(
   key: string,
   initialValue: event[] | null
 ) {
-  const [value, setValue] = useState<event[]>(() => {
-    return getSavedValue(key, initialValue);
-  });
+  const [value, setValue] = useState<event[]>([]);
+  useEffect(() => {
+    setValue(() => {
+      return getSavedValue(key, initialValue);
+    });
+  }, []);
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
   }, [value]);
