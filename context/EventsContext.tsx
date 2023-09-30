@@ -1,7 +1,7 @@
 "use client";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { event } from "@/types/calenderTypes";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
 
 type contextProps = {
   children: React.ReactNode;

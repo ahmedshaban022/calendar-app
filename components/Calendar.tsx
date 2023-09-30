@@ -9,6 +9,7 @@ import EventForm from "./EventForm";
 import CustomDialog from "./Dialog";
 
 import DayEvents from "./DayEvents";
+import { EventClickArg } from "@fullcalendar/core/index.js";
 
 interface CalendarProps {}
 
@@ -24,6 +25,11 @@ const Calendar: FC<CalendarProps> = ({}) => {
   };
 
   useEffect(() => {}, [events]);
+
+  const handleEventClick = (arg: EventClickArg) => {
+    setOpenDialog(true);
+    setSelectedDay(arg.event.start);
+  };
   return (
     <main className="   ">
       <div className="text-right">
@@ -56,7 +62,7 @@ const Calendar: FC<CalendarProps> = ({}) => {
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
-        // eventClick={eventActions}
+        eventClick={handleEventClick}
       />
     </main>
   );

@@ -26,7 +26,7 @@ const DayEvents: FC<DayEventsProps> = ({ selectedDate }) => {
           </React.Fragment>
         ))
       ) : (
-        <div>No events on this day</div>
+        <div>Free Day 😊</div>
       )}
     </div>
   );
