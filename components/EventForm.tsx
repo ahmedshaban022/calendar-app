@@ -83,23 +83,53 @@ const EventForm: FC<EventFormProps> = ({ ExitedEvent }) => {
           className="w-full p-2 m-2 rounded border border-black  "
         />
         <div className=" m-2  p-2 space-x-2 text-lg text-center">
-          <input
-            type={event.allDay ? "date" : "datetime-local"}
-            name="date"
-            onChange={(e) => {
-              setEvent({ ...event, date: new Date(e.target.value) });
-            }}
-            required={!event.date}
-          />
+          <div>
+            <input
+              type="checkbox"
+              name="allDay"
+              id="allDay"
+              checked={event.allDay}
+              onChange={(e) => setEvent({ ...event, allDay: e.target.checked })}
+            />
+            <label htmlFor="allDay"> All day </label>
+          </div>
 
-          <input
-            type="checkbox"
-            name="allDay"
-            id="allDay"
-            checked={event.allDay}
-            onChange={(e) => setEvent({ ...event, allDay: e.target.checked })}
-          />
-          <label htmlFor="allDay">All Day </label>
+          <div className="grid grid-cols-2 border border-black p-2 my-2 mx-1">
+            <label className="col-span-1" htmlFor="startDate">
+              Start Date :
+            </label>
+            <input
+              className="col-span-1"
+              type={event.allDay ? "date" : "datetime-local"}
+              name="date"
+              id="startDate"
+              onChange={(e) => {
+                setEvent({
+                  ...event,
+                  date: new Date(e.target.value),
+                  start: new Date(e.target.value),
+                });
+              }}
+              required={!event.date}
+            />
+          </div>
+          <div className="grid grid-cols-2 border border-black p-2 m-1">
+            <label htmlFor="endDate" className="col-span-1 ">
+              End Date (optional):
+            </label>
+            <input
+              className="col-span-1"
+              id="endDate"
+              type={event.allDay ? "date" : "datetime-local"}
+              name="date"
+              onChange={(e) => {
+                setEvent({
+                  ...event,
+                  end: new Date(e.target.value),
+                });
+              }}
+            />
+          </div>
         </div>
         <div>
           <select
