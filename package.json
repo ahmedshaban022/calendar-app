@@ -17,7 +17,6 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "lucide-react": "^0.279.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
