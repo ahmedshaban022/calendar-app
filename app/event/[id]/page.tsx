@@ -2,6 +2,7 @@
 import CustomDialog from "@/components/Dialog";
 import EventForm from "@/components/EventForm";
 import { useEvents } from "@/context/EventsContext";
+import { formatDate } from "@/lib/utils";
 import { event } from "@/types/calenderTypes";
 import { CalendarClock } from "lucide-react";
 import Link from "next/link";
@@ -122,22 +123,3 @@ const Page: FC<pageProps> = ({ params }) => {
 };
 
 export default Page;
-
-function formatDate(date: Date) {
-  let hours: number | string = date.getHours();
-  let minutes: number | string = date.getMinutes();
-  let ampm: number | string = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour "0" should be "12"
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  var strTime = hours + ":" + minutes + " " + ampm;
-  return (
-    date.getDate() +
-    "/" +
-    new Intl.DateTimeFormat("en", { month: "short" }).format(date) +
-    "/" +
-    date.getFullYear() +
-    " " +
-    strTime
-  );
-}
