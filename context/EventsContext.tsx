@@ -45,6 +45,8 @@ export default function EventsContextProvider({ children }: contextProps) {
   };
   const getEventsByDay = (selectedDayDate: Date) => {
     return events.filter((e) => {
+      //! need to refactor
+      e.date = new Date(e.date); //? to get the date object Because of localStorage JSON changing
       return (
         e.date.getFullYear() === selectedDayDate.getFullYear() &&
         e.date.getMonth() === selectedDayDate.getMonth() &&
